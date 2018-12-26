@@ -23,8 +23,8 @@ def get_filters():
         (str) month - name of the month to filter by, or "all" to apply no month filter
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
-    print('Hello! Let\'s explore some US bikeshare data!')
-    
+    print('Hi! Let\'s explore some US bikeshare data!')
+
     while True:
         city = input('Which city do you want to see? Chicago, New York or Washington? \n> ').lower()
         if city in CITY_DATA:
@@ -38,8 +38,8 @@ def get_filters():
         if month in month:
             break
         else:
-            print('Sorry the Input is invailed, please try again')    
-    
+            print('Sorry the Input is invailed, please try again')
+
 
     # get user input for day of week (all, monday, tuesday, ... sunday)
     day = input('One last thing. Could you type one of the week day you want to analyze?'                   ' You can type \'all\' again to apply no day filter. \n(e.g. all, monday, sunday) \n> ').lower()
@@ -59,7 +59,7 @@ def load_data(city, month, day):
         df - Pandas DataFrame containing city data filtered by month and day
     """
     df = pd.read_csv(CITY_DATA[city])
-    
+
     df['Start Time'] = pd.to_datetime(df['Start Time'])
     df['month'] = df['Start Time'].dt.month
     df['day_of_week'] = df['Start Time'].dt.weekday_name
@@ -114,7 +114,7 @@ def station_stats(df):
     print("The most common end station :", most_common_end_station)
 
     # display most frequent combination of start station and end station trip
-    df['Start_End Station'] = df['Start Station'] + [' _/_ '] + df['End Station'] 
+    df['Start_End Station'] = df['Start Station'] + [' _/_ '] + df['End Station']
     print("The most common station combination is :", df['Start_End Station'].value_counts().idxmax())
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
@@ -149,15 +149,15 @@ def user_stats(df,city):
     print("The user types are:", count_user_types)
     # Display counts of gender
     if city != 'washington':
-        
+
         count_user_gender = df['Gender'].value_counts()
         print("The gender counts are:", count_user_gender)
     else:
         print('Gender not existing for washington')
 
-        
+
     if city != 'washington':
-        
+
         # Display earliest, most recent, and most common year of birth
         the_most_common_year_of_birth = df['Birth Year'].value_counts().idxmax()
         print("The most common year of birth is:", the_most_common_year_of_birth)
@@ -165,15 +165,15 @@ def user_stats(df,city):
         print("The most recent birth year is:", most_recent)
         earliest_birth_year = df['Birth Year'].min()
         print("The earliest birth year is:", earliest_birth_year)
-        
+
     else:
         print('Birth Year not existing for washington')
 
-    
+
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
-    
-    
+
+
     print('\nDo you want to see the first 5 Data rows?\n')
     anwser = input().lower()
     if anwser == 'yes':
@@ -186,9 +186,9 @@ def main():
     while True:
         city, month, day = get_filters()
         df = load_data(city, month, day)
-        
-        
-        
+
+
+
         time_stats(df)
         station_stats(df)
         trip_duration_stats(df)
@@ -204,7 +204,3 @@ if __name__ == "__main__":
 
 
 # In[ ]:
-
-
-
-
