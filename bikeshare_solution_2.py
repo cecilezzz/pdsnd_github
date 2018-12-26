@@ -30,7 +30,7 @@ def get_filters():
         if city in CITY_DATA:
             break
         else:
-            print('Sorry the Input is invailed, please try again')
+            print('Sorry the Input is wrong, please try again')
 
     # get user input for month (all, january, february, ... , june)
     while True:
